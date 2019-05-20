@@ -26,11 +26,17 @@ exports.proxyReq = function (req, res, next) {
         });
         data.on("end", () => {
             if (data.statusCode === 200) {
-                proxy(proxyTable[req.baseUrl], {
+                let host = proxyTable[req.baseUrl];
+                let prefix = "";
+                if (typeof proxyTable[req.baseUrl] === "object") {
+                    host = proxyTable[req.baseUrl].host;
+                    prefix = proxyTable[req.baseUrl].prefix;
+                }
+                proxy(host, {
                     proxyReqPathResolver: function (req) {
                         var urlObject = require('url').parse(req.url, true);
                         urlObject.query["nirvanacmsuserid"] = +resData.trim();
-                        return urlObject.pathname + "?" + require("querystring").stringify(urlObject.query);
+                        return prefix + urlObject.pathname + "?" + require("querystring").stringify(urlObject.query);
                     }
                 })(req, res, next)
             } else {

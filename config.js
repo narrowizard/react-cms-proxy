@@ -12,7 +12,11 @@ exports.authProxyConfig = {
  * tips: /auth router segement is kept to cms usage. 
  */
 exports.proxyTable = {
-    "/user": '10.0.0.12:9589'
+    "/user": '10.0.0.12:9589',
+    "/admin": {
+        host: 'api.t.quanmaikeji.com',
+        prefix: '/admin/v1'
+    },
 }
 
 /**
