@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 WORKDIR /home/www
 COPY . .
 RUN npm install
