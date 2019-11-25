@@ -23,3 +23,5 @@ exports.proxyTable = {
  * page router for production mode.
  */
 exports.pageRouter = ["/login", "/layout", "/layout/*"]
+
+exports.requestLimit = "10mb"

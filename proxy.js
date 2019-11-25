@@ -2,6 +2,7 @@ var http = require("http");
 var proxy = require('express-http-proxy');
 var authProxyConfig = require("./config").authProxyConfig;
 var proxyTable = require("./config").proxyTable;
+var requestLimit = require("./config").requestLimit;
 
 /**
  * 
@@ -33,6 +34,7 @@ exports.proxyReq = function (req, res, next) {
                     prefix = proxyTable[req.baseUrl].prefix;
                 }
                 proxy(host, {
+                    limit: requestLimit,
                     proxyReqPathResolver: function (req) {
                         var urlObject = require('url').parse(req.url, true);
                         urlObject.query["nirvanacmsuserid"] = +resData.trim();
