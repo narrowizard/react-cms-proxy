@@ -41,6 +41,11 @@ exports.proxyTable = {
  * page router for production mode.
  */
 exports.pageRouter = ["/login", "/layout", "/layout/*"]
+
+/**
+ * https://www.npmjs.com/package/express-http-proxy#limit
+ */
+exports.requestLimit = "10mb"
 ```
 
 ## development
