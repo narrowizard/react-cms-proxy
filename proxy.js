@@ -16,9 +16,9 @@ exports.proxyReq = function (req, res, next) {
         headers: {}
     }
     if (req.headers["x-forwarded-for"]) {
-        req.headers["x-forwarded-for"] = req.headers["x-forwarded-for"] + "," + req.connection.remoteAddress;
+        options.headers["x-forwarded-for"] = req.headers["x-forwarded-for"] + "," + req.connection.remoteAddress;
     } else {
-        req.headers["x-forwarded-for"] = req.connection.remoteAddress;
+        options.headers["x-forwarded-for"] = req.connection.remoteAddress;
     }
     if (req.headers.cookie) {
         // set cookie if exist
