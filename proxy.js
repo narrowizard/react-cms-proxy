@@ -13,9 +13,12 @@ var requestLimit = require("./config").requestLimit;
 exports.proxyReq = function (req, res, next) {
     var options = {
         path: "/user/authorize?request=" + req.baseUrl + req.path,
-        headers: {
-            "X-Forwarded-For": req.headers['x-forwarded-for'] || req.connection.remoteAddress
-        }
+        headers: {}
+    }
+    if (req.headers["x-forwarded-for"]) {
+        req.headers["x-forwarded-for"] = req.headers["x-forwarded-for"] + "," + req.connection.remoteAddress;
+    } else {
+        req.headers["x-forwarded-for"] = req.connection.remoteAddress;
     }
     if (req.headers.cookie) {
         // set cookie if exist
