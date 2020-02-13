@@ -25,6 +25,7 @@ exports.proxyReq = function (req, res, next) {
         options.headers.cookie = req.headers.cookie;
     }
     var config = Object.assign(options, authProxyConfig)
+    console.log(config);
     var authRequest = http.get(config, (data) => {
         var resData = "";
         data.on("data", (chunk) => {
