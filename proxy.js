@@ -14,7 +14,7 @@ exports.proxyReq = function (req, res, next) {
     var options = {
         path: "/user/authorize?request=" + req.baseUrl + req.path,
         headers: {
-            "X-Forwarded-For": req.connection.remoteAddress
+            "X-Forwarded-For": req.headers['x-forwarded-for'] || req.connection.remoteAddress
         }
     }
     if (req.headers.cookie) {
